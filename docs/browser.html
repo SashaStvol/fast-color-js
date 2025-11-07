@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Color - Browser Example</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .panel {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .color-item {
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
+        }
+        .color-item:hover {
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+        .color-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #3d3d3d;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        button {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #005a9e;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #2d2d2d;
+            color: white;
+            margin: 5px;
+        }
+        h1, h2, h3 {
+            color: #fff;
+        }
+        .performance {
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Ultra Color - Browser Demo</h1>
+    <p>High-performance color manipulation library in action</p>
+
+    <div class="container">
+        <!-- Left Panel: Color Conversions -->
+        <div class="panel">
+            <h2>🔄 Color Conversions</h2>
+            
+            <div>
+                <h3>HEX to RGB</h3>
+                <input type="text" id="hexInput" value="#ff8040" placeholder="#RRGGBB">
+                <button onclick="convertHexToRgb()">Convert</button>
+                <div class="color-info" id="hexToRgbResult"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>RGB to HEX</h3>
+                <input type="number" id="rInput" value="255" min="0" max="255" placeholder="R">
+                <input type="number" id="gInput" value="128" min="0" max="255" placeholder="G">
+                <input type="number" id="bInput" value="64" min="0" max="255" placeholder="B">
+                <button onclick="convertRgbToHex()">Convert</button>
+                <div class="color-info" id="rgbToHexResult"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>HEX Validation</h3>
+                <input type="text" id="validateInput" value="#abc123" placeholder="#HEX">
+                <button onclick="validateHex()">Validate</button>
+                <div class="color-info" id="validateResult"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Color Generation -->
+        <div class="panel">
+            <h2>🎲 Color Generation</h2>
+            
+            <div>
+                <h3>Random Colors</h3>
+                <button onclick="generateRandomColors()">Generate 10 Random</button>
+                <button onclick="generateBrightColors()">Generate 10 Bright</button>
+                <button onclick="generatePastelColors()">Generate 10 Pastel</button>
+                <div class="color-grid" id="randomColors"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>Color Palettes</h3>
+                <button onclick="generateHsvPalette()">HSV Palette (8 colors)</button>
+                <button onclick="generateGoldenPalette()">Golden Ratio Palette (8 colors)</button>
+                <div class="color-grid" id="paletteColors"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Section -->
+    <div class="performance">
+        <h2>⚡ Performance Test</h2>
+        <button onclick="runPerformanceTest()">Run 100,000 Conversions</button>
+        <div class="color-info" id="performanceResult"></div>
+    </div>
+
+    <script type="module">
+        import { Color } from './src/Color.js';
+
+        // Make Color available globally for the demo
+        window.Color = Color;
+
+        // Initial demo
+        generateRandomColors();
+        generateHsvPalette();
+
+        function convertHexToRgb() {
+            const hex = document.getElementById('hexInput').value;
+            const start = performance.now();
+            const rgb = Color.hexToRgb(hex);
+            const time = performance.now() - start;
+            
+            document.getElementById('hexToRgbResult').innerHTML = 
+                `HEX: ${hex}<br>RGB: {r: ${rgb.r}, g: ${rgb.g}, b: ${rgb.b}}<br>Time: ${time.toFixed(3)}ms`;
+        }
+
+        function convertRgbToHex() {
+            const r = parseInt(document.getElementById('rInput').value);
+            const g = parseInt(document.getElementById('gInput').value);
+            const b = parseInt(document.getElementById('bInput').value);
+            const start = performance.now();
+            const hex = Color.rgbToHex(r, g, b);
+            const time = performance.now() - start;
+            
+            document.getElementById('rgbToHexResult').innerHTML = 
+                `RGB: (${r}, ${g}, ${b})<br>HEX: ${hex}<br>Time: ${time.toFixed(3)}ms`;
+        }
+
+        function validateHex() {
+            const hex = document.getElementById('validateInput').value;
+            const start = performance.now();
+            const isValid = Color.isHex(hex);
+            const time = performance.now() - start;
+            
+            document.getElementById('validateResult').innerHTML = 
+                `"${hex}" is ${isValid ? 'VALID' : 'INVALID'}<br>Time: ${time.toFixed(3)}ms`;
+        }
+
+        function generateRandomColors() {
+            const container = document.getElementById('randomColors');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const hex = Color.randomHexRgb();
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.style.backgroundColor = hex;
+                colorItem.style.color = getContrastColor(hex);
+                colorItem.textContent = hex;
+                colorItem.title = `Click to copy ${hex}`;
+                colorItem.onclick = () => copyToClipboard(hex);
+                container.appendChild(colorItem);
+            }
+        }
+
+        function generateBrightColors() {
+            const container = document.getElementById('randomColors');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const num = Color.randomBrightNumberRgb();
+                const hex = Color.numberToHexRgb(num);
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.style.backgroundColor = hex;
+                colorItem.style.color = getContrastColor(hex);
+                colorItem.textContent = hex;
+                colorItem.title = `Click to copy ${hex}`;
+                colorItem.onclick = () => copyToClipboard(hex);
+                container.appendChild(colorItem);
+            }
+        }
+
+        function generatePastelColors() {
+            const container = document.getElementById('randomColors');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const num = Color.randomPastelNumberRgb();
+                const hex = Color.numberToHexRgb(num);
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.style.backgroundColor = hex;
+                colorItem.style.color = getContrastColor(hex);
+                colorItem.textContent = hex;
+                colorItem.title = `Click to copy ${hex}`;
+                colorItem.onclick = () => copyToClipboard(hex);
+                container.appendChild(colorItem);
+            }
+        }
+
+        function generateHsvPalette() {
+            const container = document.getElementById('paletteColors');
+            container.innerHTML = '';
+            
+            const palette = Color.generatePaletteHSV(8);
+            palette.forEach(num => {
+                const hex = Color.numberToHexRgb(num);
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.style.backgroundColor = hex;
+                colorItem.style.color = getContrastColor(hex);
+                colorItem.textContent = hex;
+                colorItem.title = `Click to copy ${hex}`;
+                colorItem.onclick = () => copyToClipboard(hex);
+                container.appendChild(colorItem);
+            });
+        }
+
+        function generateGoldenPalette() {
+            const container = document.getElementById('paletteColors');
+            container.innerHTML = '';
+            
+            const palette = Color.generatePaletteGolden(8);
+            palette.forEach(num => {
+                const hex = Color.numberToHexRgb(num);
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.style.backgroundColor = hex;
+                colorItem.style.color = getContrastColor(hex);
+                colorItem.textContent = hex;
+                colorItem.title = `Click to copy ${hex}`;
+                colorItem.onclick = () => copyToClipboard(hex);
+                container.appendChild(colorItem);
+            });
+        }
+
+        function runPerformanceTest() {
+            const iterations = 100000;
+            const testHex = "#a1b2c3";
+            
+            // Test hexToNumber
+            let start = performance.now();
+            for (let i = 0; i < iterations; i++) {
+                Color.hexToNumber(testHex);
+            }
+            const hexToNumberTime = performance.now() - start;
+            
+            // Test numberToHex
+            start = performance.now();
+            for (let i = 0; i < iterations; i++) {
+                Color.numberToHex(0xA1B2C3);
+            }
+            const numberToHexTime = performance.now() - start;
+            
+            document.getElementById('performanceResult').innerHTML = 
+                `100,000 operations completed:<br>
+                 hexToNumber: ${hexToNumberTime.toFixed(2)}ms<br>
+                 numberToHex: ${numberToHexTime.toFixed(2)}ms<br>
+                 Average: ${((hexToNumberTime + numberToHexTime) / 2).toFixed(2)}ms per operation`;
+        }
+
+        function getContrastColor(hex) {
+            // Simple contrast calculation for text color
+            const num = Color.hexToNumber(hex.replace('#', ''));
+            const rgb = Color.numberToRgb(num);
+            const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+            return brightness > 128 ? '#000' : '#fff';
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Optional: Show copied notification
+                console.log(`Copied: ${text}`);
+            });
+        }
+    </script>
+</body>
+</html>
