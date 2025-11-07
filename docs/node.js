@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * Ultra Color - Node.js Example
+ * Fast-Color-Js - Node.js Example
  * Demonstrates library usage in server-side applications
  */
 
 import { Color } from '../src/Color.js';
 
-console.log('🎨 Ultra Color - Node.js Examples\n');
+console.log('🎨 Fast-Color-Js - Node.js Examples\n');
 
 // Example 1: Basic conversions
 console.log('1. 🔄 Basic Color Conversions');
