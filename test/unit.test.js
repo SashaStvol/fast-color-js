@@ -7,7 +7,7 @@ const testHex = "#a1b2c3";
 const testNum = 0xA1B2C3;
 
 console.assert(Color.hexToNumber(testHex) === testNum, 'hexToNumber failed');
-console.assert(Color.numberToHex(testNum) === testHex, 'numberToHex failed');
+console.assert(Color.numberToHexRgb(testNum) === testHex, 'numberToHexRgb failed');
 
 // Test RGB conversions
 const rgb = { r: 161, g: 178, b: 195 };
