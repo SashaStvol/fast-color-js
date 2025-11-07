@@ -22,7 +22,7 @@ Run `node examples/node.js` to see:
 ### Browser
 ```html
 <script type="module">
-    import { Color } from './src/Color.js';
+    import { Color } from '../src/Color.js';
     
     // Convert HEX to RGB
     const rgb = Color.hexToRgb('#ff8040');
