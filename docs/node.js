@@ -131,7 +131,7 @@ function simulateImageProcessing(width = 100, height = 100) {
     console.log('Sample colors:', hexData.slice(0, 5));
 }
 
-simulateImageProcessing(10, 10);
+simulateImageProcessing(1000, 1000);
 
 // Example 7: Advanced features
 console.log('\n7. 🔧 Advanced Features');
