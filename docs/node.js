@@ -1,11 +1,9 @@
-#!/usr/bin/env node
-
 /**
  * Fast-Color-Js - Node.js Example
  * Demonstrates library usage in server-side applications
  */
 
-import { Color } from '../src/Color.js';
+const { Color } = require("fast-color-js");
 
 console.log('🎨 Fast-Color-Js - Node.js Examples\n');
 
@@ -79,21 +77,21 @@ function runPerformanceTest(iterations = 100000) {
     const testHex = '#a1b2c3';
     const testNum = 0xA1B2C3;
     
-    // Test hexToNumber
+    // Тест HEX → Number
     console.time(`hexToNumber (${iterations} ops)`);
     for (let i = 0; i < iterations; i++) {
         Color.hexToNumber(testHex);
     }
     console.timeEnd(`hexToNumber (${iterations} ops)`);
     
-    // Test numberToHex
-    console.time(`numberToHex (${iterations} ops)`);
+    // Тест Number → HEX
+    console.time(`numberToHexRgb (${iterations} ops)`);
     for (let i = 0; i < iterations; i++) {
-        Color.numberToHex(testNum);
+        Color.numberToHexRgb(testNum);
     }
-    console.timeEnd(`numberToHex (${iterations} ops)`);
+    console.timeEnd(`numberToHexRgb (${iterations} ops)`);
     
-    // Test bulk operations
+    // Пакетная обработка
     console.time(`bulk processing (${iterations} colors)`);
     const hexArray = Array(iterations).fill(testHex);
     const numbers = hexArray.map(Color.hexToNumber);
@@ -114,13 +112,13 @@ function simulateImageProcessing(width = 100, height = 100) {
     
     console.time('Generate pixel data');
     for (let i = 0; i < pixels; i++) {
-        // Simulate different color generation strategies
+        // Разные стратегии генерации цветов
         if (i % 3 === 0) {
-            colorData[i] = Color.randomRgb(); // Random colors
+            colorData[i] = Color.randomRgb(); // Случайные цвета
         } else if (i % 3 === 1) {
-            colorData[i] = Color.randomBrightNumberRgb(); // Bright colors
+            colorData[i] = Color.randomBrightNumberRgb(); // Яркие цвета
         } else {
-            colorData[i] = Color.randomPastelNumberRgb(); // Pastel colors
+            colorData[i] = Color.randomPastelNumberRgb(); // Пастельные цвета
         }
     }
     console.timeEnd('Generate pixel data');
@@ -133,7 +131,7 @@ function simulateImageProcessing(width = 100, height = 100) {
     console.log('Sample colors:', hexData.slice(0, 5));
 }
 
-simulateImageProcessing(10, 10); // Small scale for demo
+simulateImageProcessing(10, 10);
 
 // Example 7: Advanced features
 console.log('\n7. 🔧 Advanced Features');
@@ -151,7 +149,7 @@ console.log(`HSV(240, 100, 100) → RGB(${blueRgb[0]}, ${blueRgb[1]}, ${blueRgb[
 
 console.log('\n🎉 All examples completed!');
 console.log('\nUsage tips:');
-console.log('• Import: import { Color } from "fast-color-js"');
+console.log('• Import: const { Color } = require("fast-color-js");"');
 console.log('• For bulk operations, use array methods with Color methods');
 console.log('• Use hexToNumberBit() for RGB, hexToNumber() for RGBA');
 console.log('• Check isHex() before processing user input');
