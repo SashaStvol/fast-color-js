@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/ultra-color.svg)](https://www.npmjs.com/package/fast-color-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/ultra-color)](https://bundlephobia.com/package/fast-color-js)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/fast-color-js)](https://bundlephobia.com/package/fast-color-js)
 
 The fastest color manipulation library for JavaScript. Optimized for games, real-time graphics, and bulk processing.
 
