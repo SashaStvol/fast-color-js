@@ -1,7 +1,7 @@
 /**
  * Ultra-fast color manipulation library for games and real-time applications
  * @class Color
- * @version 1.0.2
+ * @version 1.0.3
  * @author SashaStvol
  * @license MIT
  */
