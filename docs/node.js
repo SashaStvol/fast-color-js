@@ -151,7 +151,7 @@ console.log(`HSV(240, 100, 100) → RGB(${blueRgb[0]}, ${blueRgb[1]}, ${blueRgb[
 
 console.log('\n🎉 All examples completed!');
 console.log('\nUsage tips:');
-console.log('• Import: import { Color } from "ultra-color"');
+console.log('• Import: import { Color } from "fast-color-js"');
 console.log('• For bulk operations, use array methods with Color methods');
 console.log('• Use hexToNumberBit() for RGB, hexToNumber() for RGBA');
 console.log('• Check isHex() before processing user input');
