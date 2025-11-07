@@ -1,4 +1,4 @@
-##Example
+# Example
 
 import { Color } from 'fast-color-js';
 
