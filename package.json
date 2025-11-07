@@ -1,6 +1,6 @@
 {
   "name": "fast-color-js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Ultra-fast color manipulation library for games and real-time applications",
   "main": "src/index.js",
   "type": "module",
