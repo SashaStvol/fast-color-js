@@ -14,7 +14,7 @@ function benchmark(name, fn, iterations = 1000000) {
 
 // Benchmark suite
 benchmark('hexToNumber', () => Color.hexToNumber("#a1b2c3"));
-benchmark('numberToHex', () => Color.numberToHex(0xA1B2C3));
+benchmark('numberToHexRgb', () => Color.numberToHexRgb(0xA1B2C3));
 benchmark('rgbToNumber', () => Color.rgbToNumber(161, 178, 195));
 benchmark('numberToRgb', () => Color.numberToRgb(0xA1B2C3));
 benchmark('isHex', () => Color.isHex("#a1b2c3"));
